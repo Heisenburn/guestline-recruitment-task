@@ -1,7 +1,7 @@
 import type { MergedHotelWithDetailsType } from './types'
 import React from 'react'
 
-export const ListView = ({
+export const HotelListing = ({
   data,
 }: {
   data: MergedHotelWithDetailsType[]

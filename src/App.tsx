@@ -4,7 +4,7 @@ import {
   HotelsRootData,
   MergedHotelWithDetailsType,
 } from './types'
-import { ListView } from './ListView'
+import { HotelListing } from './HotelListing'
 
 const HOTELS_BASIC_DATA_FETCH_URL =
   'https://obmng.dbm.guestline.net/api/hotels?collection-id=OBMNG'
@@ -15,8 +15,8 @@ const App = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
 
   /*
-  Since the data is not updated frequently there is no need to
-  fetch it each time the data is being filtered (stars, adults/children options)
+  Since in this case data is not updated frequently there is no need to
+  fetch it each time the hotels are being filtered (stars, adults/children options)
   */
   useEffect(() => {
     const fetchData = async () => {
@@ -41,15 +41,13 @@ const App = (): JSX.Element => {
         })
       } catch (error) {
         console.warn(error)
-      } finally {
-        //setIsFetching(false)
       }
     }
 
     fetchData()
   }, [])
 
-  return data ? <ListView data={data} /> : <p>Loading...</p>
+  return data ? <HotelListing data={data} /> : <p>Loading...</p>
 }
 
 export default App
