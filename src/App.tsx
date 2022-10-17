@@ -15,7 +15,7 @@ const App = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
 
   /*
-  Since in this case data is not updated frequently there is no need to
+  Since in this case the data is not updated frequently there is no need to
   fetch it each time the hotels are being filtered (stars, adults/children options)
   */
   useEffect(() => {
