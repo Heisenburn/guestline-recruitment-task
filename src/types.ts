@@ -46,12 +46,6 @@ export interface Room {
   facilities: Facility[]
 }
 
-export interface Occupancy {
-  maxAdults: number
-  maxChildren: number
-  maxOverall: number
-}
-
 export interface Image {
   url: string
   alt: string
@@ -81,7 +75,7 @@ export interface Room {
 export interface Occupancy {
   maxAdults: number
   maxChildren: number
-  maxOverall: number
+  maxOverall?: number
 }
 
 export interface Image {

@@ -14,44 +14,48 @@ export const HotelListing = ({
   const [listingItems, setListingItems] = useState(data)
   const [numberOfChildren, setNumberOfChildren] = useState(0)
   const [numberOfAdults, setNumberOfAdults] = useState(0)
-
-  const handleRatingClick = useCallback(
-    (selectedRating: string) => {
-      const hotelsFilteredByRating = listingItems.filter(
-        (hotel) => parseInt(selectedRating) == parseInt(hotel.starRating),
-      )
-
-      setListingItems(hotelsFilteredByRating)
-    },
-    [listingItems],
-  )
+  const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
   const handleResetButton = () => {
     setListingItems(data)
   }
 
   useEffect(() => {
-    const hotelsMatchingRatingFilter = listingItems.filter((hotel) =>
-      hotel.rooms.find(
-        ({ occupancy }) =>
-          numberOfAdults <= occupancy.maxAdults &&
-          numberOfChildren <= occupancy.maxChildren &&
-          numberOfChildren + numberOfAdults <= occupancy.maxOverall,
-      ),
+    let hotelsMatchingRatingFilter = data
+
+    if (selectedRating) {
+      hotelsMatchingRatingFilter = data.filter(
+        (hotel) => selectedRating == parseInt(hotel.starRating),
+      )
+    }
+
+    /* Important note: API should always return maxOverall, for hotel ID 3 and 4 it doest not
+ therefore I am doing calculation of maxOverall on FE */
+    const hotelsMatchingOccupancyFilter = hotelsMatchingRatingFilter.filter(
+      (hotel) =>
+        hotel.rooms.find(
+          ({ occupancy }) =>
+            numberOfAdults <= occupancy.maxAdults &&
+            numberOfChildren <= occupancy.maxChildren &&
+            numberOfAdults + numberOfChildren <=
+              occupancy.maxAdults + occupancy.maxChildren,
+        ),
     )
 
-    console.log({ hotelsMatchingRatingFilter })
     const hotelsMatchingRatingFilterWithFilteredRooms =
-      hotelsMatchingRatingFilter.filter(
+      hotelsMatchingOccupancyFilter.filter(
         (hotel) =>
           (hotel.rooms = hotel.rooms.filter(
             ({ occupancy }) =>
-              occupancy.maxOverall <= 2 && occupancy.maxAdults <= 2,
+              numberOfAdults <= occupancy.maxAdults &&
+              numberOfChildren <= occupancy.maxChildren &&
+              numberOfAdults + numberOfChildren <=
+                occupancy.maxAdults + occupancy.maxChildren,
           )),
       )
 
     setListingItems(hotelsMatchingRatingFilterWithFilteredRooms)
-  }, [numberOfAdults, numberOfChildren])
+  }, [data, numberOfAdults, numberOfChildren, selectedRating])
 
   return (
     <>
@@ -80,10 +84,10 @@ export const HotelListing = ({
         </button>
       </div>
       <p>Rating:</p>
-      {['1', '2', '3', '4', '5'].map((ratingNumber) => {
+      {[1, 2, 3, 4, 5].map((ratingNumber) => {
         return (
           <button
-            onClick={() => handleRatingClick(ratingNumber)}
+            onClick={() => setSelectedRating(ratingNumber)}
             key={ratingNumber}
           >
             {ratingNumber}
@@ -91,48 +95,56 @@ export const HotelListing = ({
         )
       })}
       <div style={{ display: 'flex' }}>
-        {listingItems.map((hotel) => {
-          return (
-            <div
-              key={hotel.id}
-              style={{
-                border: '1px solid black',
-                marginBottom: '10px',
-                width: '250px',
-              }}
-            >
-              <p>{hotel.name}</p>
-              {/*<p>Adress: {hotel.address1}</p>*/}
-              {/*{hotel.address2 ? <p>Adress: {hotel.address2}</p> : null}*/}
-              {/*<p>{hotel.description}</p>*/}
-              <p>
-                <strong>starRating:</strong> {hotel.starRating}
-              </p>
-              {hotel.rooms.map((details) => {
-                return (
-                  <div
-                    key={details.id}
-                    style={{ border: '1px dotted black', marginLeft: '10px' }}
-                  >
-                    {/*<p>{details.name}</p>*/}
-                    {/*<p>{details.bedConfiguration}</p>*/}
-                    {/*<p>{details.longDescription}</p>*/}
-                    {Object.keys(details.occupancy).map(
-                      (occupancyKey, index) => {
-                        return (
-                          <p key={index}>
-                            {occupancyKey}:
-                            {details.occupancy[occupancyKey as keyof Occupancy]}
-                          </p>
-                        )
-                      },
-                    )}
-                  </div>
-                )
-              })}
-            </div>
-          )
-        })}
+        {listingItems.length > 0 ? (
+          listingItems.map((hotel) => {
+            return (
+              <div
+                key={hotel.id}
+                style={{
+                  border: '1px solid black',
+                  marginBottom: '10px',
+                  width: '250px',
+                }}
+              >
+                <p>{hotel.name}</p>
+                {/*<p>Adress: {hotel.address1}</p>*/}
+                {/*{hotel.address2 ? <p>Adress: {hotel.address2}</p> : null}*/}
+                {/*<p>{hotel.description}</p>*/}
+                <p>
+                  <strong>starRating:</strong> {hotel.starRating}
+                </p>
+                {hotel.rooms.map((details) => {
+                  return (
+                    <div
+                      key={details.id}
+                      style={{ border: '1px dotted black', marginLeft: '10px' }}
+                    >
+                      {/*<p>{details.name}</p>*/}
+                      {/*<p>{details.bedConfiguration}</p>*/}
+                      {/*<p>{details.longDescription}</p>*/}
+                      {Object.keys(details.occupancy).map(
+                        (occupancyKey, index) => {
+                          return (
+                            <p key={index}>
+                              {occupancyKey}:
+                              {
+                                details.occupancy[
+                                  occupancyKey as keyof Occupancy
+                                ]
+                              }
+                            </p>
+                          )
+                        },
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            )
+          })
+        ) : (
+          <p>No results... Try changing filters</p>
+        )}
       </div>
     </>
   )
