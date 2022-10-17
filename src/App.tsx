@@ -16,7 +16,7 @@ const App = (): JSX.Element => {
 
   /*
   Since in this case the data is not updated frequently there is no need to
-  fetch it each time the hotels are being filtered (stars, adults/children options)
+  fetch it each time the hotels are being filtered (stars, adults/children options selected)
   */
   useEffect(() => {
     const fetchData = async () => {
