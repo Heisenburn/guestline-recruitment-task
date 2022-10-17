@@ -1,5 +1,5 @@
 import type { MergedHotelWithDetailsType, Occupancy } from './types'
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 // Filter based on the star rating of the hotel, that is, given I have selected 3 stars, then I am able to see all hotels with a 3 and above rating.
 // Filter based on the capacity of the room. That is, when I have selected 1 adult and 1 child then I am able to see all rooms with at least that capacity. Therefore, I will not be shown any rooms which do not accept children.
@@ -18,6 +18,9 @@ export const HotelListing = ({
 
   const handleResetButton = () => {
     setListingItems(data)
+    setNumberOfChildren(0)
+    setNumberOfAdults(0)
+    setSelectedRating(null)
   }
 
   useEffect(() => {
@@ -83,7 +86,7 @@ export const HotelListing = ({
           -
         </button>
       </div>
-      <p>Rating:</p>
+      <p>selectedRating: {selectedRating}</p>
       {[1, 2, 3, 4, 5].map((ratingNumber) => {
         return (
           <button
