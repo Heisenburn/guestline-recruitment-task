@@ -47,6 +47,7 @@ const App = (): JSX.Element => {
     fetchData()
   }, [])
 
+  console.log({ data })
   return data ? <HotelListing data={data} /> : <p>Loading...</p>
 }
 

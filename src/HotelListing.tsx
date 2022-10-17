@@ -126,7 +126,7 @@ export const HotelListing = ({
                       {/*<p>{details.longDescription}</p>*/}
                       {Object.keys(details.occupancy).map(
                         (occupancyKey, index) => {
-                          return (
+                          return occupancyKey != 'maxOverall' ? (
                             <p key={index}>
                               {occupancyKey}:
                               {
@@ -135,7 +135,7 @@ export const HotelListing = ({
                                 ]
                               }
                             </p>
-                          )
+                          ) : null
                         },
                       )}
                     </div>
