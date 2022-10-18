@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Rating } from '@mui/material'
+import { Typography, Rating, Button } from '@mui/material'
 
 interface Props {
   setNumberOfChildren: React.Dispatch<React.SetStateAction<number>>
@@ -25,7 +25,7 @@ const Filters = ({
   }
   return (
     <div>
-      <div>
+      <div style={{ display: 'flex' }}>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="caption">Rating: </Typography>
           <Rating
@@ -38,32 +38,53 @@ const Filters = ({
         </div>
 
         <div>
-          <p>Adults: {numberOfAdults}</p>
-          <button
-            onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
-          >
-            +
-          </button>
-          <button
+          <Typography variant="caption">Adults: </Typography>
+
+          <Button
+            variant="outlined"
+            //TODO: obsłużenie ujemnych wartości
             onClick={() => setNumberOfAdults((prevState) => prevState - 1)}
+            size="small"
+            style={{ minWidth: '20px' }}
           >
             -
-          </button>
+          </Button>
+          <Typography variant="caption">{numberOfAdults} </Typography>
+          <Button
+            variant="outlined"
+            onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
+            size="small"
+            style={{ minWidth: '20px' }}
+          >
+            +
+          </Button>
         </div>
 
-        <p>Children: {numberOfChildren}</p>
-        <button
-          onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
-        >
-          +
-        </button>
-        <button
-          onClick={() => setNumberOfChildren((prevState) => prevState - 1)}
-        >
-          -
-        </button>
+        <div>
+          <Typography variant="caption">Children: </Typography>
+          <Button
+            variant="outlined"
+            //TODO: obsłużenie ujemnych wartości
+            onClick={() => setNumberOfChildren((prevState) => prevState - 1)}
+            size="small"
+            style={{ minWidth: '20px' }}
+          >
+            -
+          </Button>
+          <Typography variant="caption">{numberOfChildren} </Typography>
+          <Button
+            variant="outlined"
+            onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
+            size="small"
+            style={{ minWidth: '20px' }}
+          >
+            +
+          </Button>
+        </div>
       </div>
-      <button onClick={handleResetButton}>Reset filters</button>
+      <button style={{ margin: '10px 0' }} onClick={handleResetButton}>
+        Reset filters
+      </button>
     </div>
   )
 }
