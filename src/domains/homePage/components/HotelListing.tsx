@@ -36,6 +36,11 @@ export const HotelListing = ({
       hotelsMatchingRatingFilter = data.filter(
         (hotel) => selectedRating <= parseInt(hotel.starRating),
       )
+      //sort by ratingNumber from lowest to highest (not in the requirements but improves UX)
+      hotelsMatchingRatingFilter = hotelsMatchingRatingFilter.sort(
+        (hotelA, hotelB) =>
+          parseInt(hotelA.starRating) - parseInt(hotelB.starRating),
+      )
     }
 
     const hotelsMatchingOccupancyFilter: MergedHotelWithDetailsType[] = []
@@ -83,61 +88,4 @@ export const HotelListing = ({
   ) : (
     <Typography variant="h3">No results... Try changing filters</Typography>
   )
-}
-
-// <div style={{ display: 'flex' }}>
-//   {listingItems.length > 0 ? (
-//       listingItems.map((hotel) => {
-//         return (
-//             <div
-//                 key={hotel.id}
-//                 style={{
-//                   border: '1px solid black',
-//                   marginBottom: '10px',
-//                   width: '250px',
-//                 }}
-//             >
-//               <p>{hotel.name}</p>
-//               {/*<p>Adress: {hotel.address1}</p>*/}
-//               {/*{hotel.address2 ? <p>Adress: {hotel.address2}</p> : null}*/}
-//               {/*<p>{hotel.description}</p>*/}
-//               <p>
-//                 <strong>starRating:</strong> {hotel.starRating}
-//               </p>
-//               {hotel.rooms.map((details) => {
-//                 return (
-//                     <div
-//                         key={details.id}
-//                         style={{ border: '1px dotted black', marginLeft: '10px' }}
-//                     >
-//                       {/*<p>{details.name}</p>*/}
-//                       {/*<p>{details.bedConfiguration}</p>*/}
-//                       {/*<p>{details.longDescription}</p>*/}
-//                       {Object.keys(details.occupancy).map(
-//                           (occupancyKey, index) => {
-//                             return occupancyKey != 'maxOverall' ? (
-//                                 <p key={index}>
-//                                   {occupancyKey}:
-//                                   {
-//                                     details.occupancy[
-//                                         occupancyKey as keyof Occupancy
-//                                         ]
-//                                   }
-//                                 </p>
-//                             ) : null
-//                           },
-//                       )}
-//                     </div>
-//                 )
-//               })}
-//             </div>
-//         )
-//       })
-//   ) : (
-//       <p>No results... Try changing filters</p>
-{
-  /*  )}*/
-}
-{
-  /*</div>*/
 }

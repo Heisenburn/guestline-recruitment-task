@@ -29,6 +29,7 @@ const HomePage = (): JSX.Element => {
   const [numberOfAdults, setNumberOfAdults] = useState(0)
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
+  //TODO: posortować hotele od najniższej wartości ratingu
   return (
     <>
       <Banner />
@@ -51,7 +52,7 @@ const HomePage = (): JSX.Element => {
         />
       ) : (
         <Stack spacing={1} style={{ display: 'flex', alignItems: 'center' }}>
-          {/*Estimated number of items*/}
+          {/*Estimated number of hotels*/}
           {[1, 2, 3, 4].map((item) => {
             return (
               <Skeleton
