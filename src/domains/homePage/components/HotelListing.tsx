@@ -8,6 +8,8 @@ import {
   Rating,
   Typography,
 } from '@mui/material'
+import HotelBaseInfo from './HotelBaseInfo/HotelBaseInfo'
+import { HotelRoomsInfo } from './HotelRoomsInfo/HotelRoomsInfo'
 
 //TODO: View all images of the displayed hotel
 //TODO:  See hotel details (including hotel name, address and star rating) and room details (including room type, max adults, max children and long description)
@@ -62,19 +64,12 @@ export const HotelListing = ({
   return listingItems.length > 0 ? (
     <>
       {listingItems.map((hotel) => (
-        <Card key={hotel.id} sx={{ margin: '10px 0' }}>
+        <Card key={hotel.id} sx={{ margin: '10px' }}>
           <CardContent>
-            <Typography gutterBottom variant="h5" component="div">
-              {hotel.name}
-            </Typography>
-            <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              {hotel.address1}
-            </Typography>
-            <Rating
-              name="read-only"
-              value={parseInt(hotel.starRating)}
-              readOnly
-            />
+            <HotelBaseInfo hotel={hotel} key={hotel.id} />
+            {hotel.rooms.map((room) => (
+              <HotelRoomsInfo room={room} key={room.id} />
+            ))}
           </CardContent>
         </Card>
       ))}

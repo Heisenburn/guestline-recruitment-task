@@ -34,18 +34,6 @@ export interface Position {
   timezone: string
 }
 
-export interface Room {
-  id: string
-  name: string
-  shortDescription: string
-  longDescription: string
-  occupancy: Occupancy
-  disabledAccess: boolean
-  bedConfiguration: string
-  images: Image[]
-  facilities: Facility[]
-}
-
 export interface Image {
   url: string
   alt: string
