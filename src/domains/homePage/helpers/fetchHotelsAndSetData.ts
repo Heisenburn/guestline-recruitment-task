@@ -1,16 +1,19 @@
 import {
   HOTELS_BASIC_DATA_FETCH_URL,
   ROOM_DETAILS_FETCH_URL_PREFIX,
-} from '../constants'
+} from '../constants/constants'
 import {
   HotelDetailsResponse,
   HotelsRootData,
   MergedHotelWithDetailsType,
 } from '../types/types'
+import React from 'react'
 
-export const getHotelsDataMergedWithRoomsDetails = async (): Promise<
-  MergedHotelWithDetailsType[] | null
-> => {
+export const fetchHotelsAndSetData = async (
+  setData: React.Dispatch<
+    React.SetStateAction<MergedHotelWithDetailsType[] | null>
+  >,
+): Promise<void> => {
   try {
     const response = await fetch(HOTELS_BASIC_DATA_FETCH_URL)
     const hotelsRootData: HotelsRootData[] = await response.json()
@@ -28,10 +31,9 @@ export const getHotelsDataMergedWithRoomsDetails = async (): Promise<
     )
 
     Promise.all(mergedDataPromises).then((parsedPromises) => {
-      return parsedPromises
+      setData(parsedPromises)
     })
   } catch (error) {
     console.warn(error)
   }
-  return null
 }

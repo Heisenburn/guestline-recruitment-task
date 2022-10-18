@@ -1,13 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
-import {
-  HotelDetailsResponse,
-  HotelsRootData,
-  MergedHotelWithDetailsType,
-} from './types/types'
+import { MergedHotelWithDetailsType } from './types/types'
 import { HotelListing } from './components/HotelListing'
 import { Banner } from './components/Banner/Banner.theme'
 import Filters from './components/Filters/Filters'
-import { getHotelsDataMergedWithRoomsDetails } from './helpers/getHotelsDataMergedWithRoomsDetails'
+import { fetchHotelsAndSetData } from './helpers/fetchHotelsAndSetData'
 
 const HomePage = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
@@ -19,14 +15,11 @@ const HomePage = (): JSX.Element => {
 
   useEffect(() => {
     if (shouldFetch.current) {
-      const fetchAndSetData = async () => {
-        const response = await getHotelsDataMergedWithRoomsDetails()
-        console.log({ response })
-        setData(response)
+      const fetch = async () => {
+        await fetchHotelsAndSetData(setData)
       }
 
-      fetchAndSetData()
-
+      fetch()
       shouldFetch.current = false
     }
   }, [])

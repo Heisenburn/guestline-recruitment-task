@@ -1,4 +1,5 @@
 import React from 'react'
+import { Typography, Rating } from '@mui/material'
 
 interface Props {
   setNumberOfChildren: React.Dispatch<React.SetStateAction<number>>
@@ -18,13 +19,12 @@ const Filters = ({
   selectedRating,
 }: Props) => {
   const handleResetButton = () => {
-    // setListingItems(data) TODO: ?
     setNumberOfChildren(0)
     setNumberOfAdults(0)
     setSelectedRating(null)
   }
   return (
-    <>
+    <div>
       <button onClick={handleResetButton}>Reset filters</button>
 
       <div>
@@ -49,18 +49,26 @@ const Filters = ({
           -
         </button>
       </div>
-      <p>selectedRating: {selectedRating}</p>
-      {[1, 2, 3, 4, 5].map((ratingNumber) => {
-        return (
-          <button
-            onClick={() => setSelectedRating(ratingNumber)}
-            key={ratingNumber}
-          >
-            {ratingNumber}
-          </button>
-        )
-      })}
-    </>
+      <Typography component="legend">Rating</Typography>
+      <Rating
+        name="simple-controlled"
+        value={selectedRating}
+        onChange={(event, newValue) => {
+          setSelectedRating(newValue)
+        }}
+      />
+      {/*<p>selectedRating: {selectedRating}</p>*/}
+      {/*{[1, 2, 3, 4, 5].map((ratingNumber) => {*/}
+      {/*  return (*/}
+      {/*    <button*/}
+      {/*      onClick={() => setSelectedRating(ratingNumber)}*/}
+      {/*      key={ratingNumber}*/}
+      {/*    >*/}
+      {/*      {ratingNumber}*/}
+      {/*    </button>*/}
+      {/*  )*/}
+      {/*})}*/}
+    </div>
   )
 }
 
