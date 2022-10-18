@@ -4,7 +4,7 @@ import { HotelListing } from './components/HotelListing'
 import { Banner } from './components/Banner/Banner.theme'
 import Filters from './components/Filters/Filters'
 import { fetchHotelsAndSetData } from './helpers/fetchHotelsAndSetData'
-import { Typography } from '@mui/material'
+import { Skeleton, Stack } from '@mui/material'
 
 const HomePage = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
@@ -29,9 +29,10 @@ const HomePage = (): JSX.Element => {
   const [numberOfAdults, setNumberOfAdults] = useState(0)
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
-  return data ? (
+  return (
     <>
       <Banner />
+
       <Filters
         //TODO: może lepiej jeden stan trzymający wszystkie filtry?
         setNumberOfChildren={setNumberOfChildren}
@@ -41,15 +42,30 @@ const HomePage = (): JSX.Element => {
         numberOfAdults={numberOfAdults}
         selectedRating={selectedRating}
       />
-      <HotelListing
-        data={data}
-        numberOfChildren={numberOfChildren}
-        numberOfAdults={numberOfAdults}
-        selectedRating={selectedRating}
-      />
+      {data ? (
+        <HotelListing
+          data={data}
+          numberOfChildren={numberOfChildren}
+          numberOfAdults={numberOfAdults}
+          selectedRating={selectedRating}
+        />
+      ) : (
+        <Stack spacing={1}>
+          {/*Estimated number of items*/}
+          {[1, 2, 3, 4].map((item) => {
+            return (
+              <Skeleton
+                key={item}
+                variant="rectangular"
+                width={210}
+                height={118}
+                animation="wave"
+              />
+            )
+          })}
+        </Stack>
+      )}
     </>
-  ) : (
-    <p>Loading...</p>
   )
 }
 
