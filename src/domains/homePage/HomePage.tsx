@@ -57,8 +57,8 @@ const HomePage = (): JSX.Element => {
               <Skeleton
                 key={item}
                 variant="rectangular"
-                width={210}
-                height={118}
+                width="100%"
+                height={300}
                 animation="wave"
               />
             )

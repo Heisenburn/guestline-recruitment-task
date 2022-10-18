@@ -5,6 +5,7 @@ import {
   Card,
   CardActions,
   CardContent,
+  Rating,
   Typography,
 } from '@mui/material'
 
@@ -61,30 +62,20 @@ export const HotelListing = ({
   return listingItems.length > 0 ? (
     <>
       {listingItems.map((hotel) => (
-        <Card key={hotel.id}>
+        <Card key={hotel.id} sx={{ margin: '10px 0' }}>
           <CardContent>
-            <Typography
-              sx={{ fontSize: 14 }}
-              color="text.secondary"
-              gutterBottom
-            >
-              Word of the Day
-            </Typography>
-            <Typography variant="h5" component="div">
-              dupa
+            <Typography gutterBottom variant="h5" component="div">
+              {hotel.name}
             </Typography>
             <Typography sx={{ mb: 1.5 }} color="text.secondary">
-              adjective
+              {hotel.address1}
             </Typography>
-            <Typography variant="body2">
-              well meaning and kindly.
-              <br />
-              {'"a benevolent smile"'}
-            </Typography>
+            <Rating
+              name="read-only"
+              value={parseInt(hotel.starRating)}
+              readOnly
+            />
           </CardContent>
-          <CardActions>
-            <Button size="small">Learn More</Button>
-          </CardActions>
         </Card>
       ))}
     </>
