@@ -25,9 +25,32 @@ const Filters = ({
   }
   return (
     <div>
-      <button onClick={handleResetButton}>Reset filters</button>
-
       <div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Typography variant="caption">Rating: </Typography>
+          <Rating
+            size="small"
+            value={selectedRating}
+            onChange={(event, newValue) => {
+              setSelectedRating(newValue)
+            }}
+          />
+        </div>
+
+        <div>
+          <p>Adults: {numberOfAdults}</p>
+          <button
+            onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
+          >
+            +
+          </button>
+          <button
+            onClick={() => setNumberOfAdults((prevState) => prevState - 1)}
+          >
+            -
+          </button>
+        </div>
+
         <p>Children: {numberOfChildren}</p>
         <button
           onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
@@ -40,34 +63,7 @@ const Filters = ({
           -
         </button>
       </div>
-      <div>
-        <p>Adults: {numberOfAdults}</p>
-        <button onClick={() => setNumberOfAdults((prevState) => prevState + 1)}>
-          +
-        </button>
-        <button onClick={() => setNumberOfAdults((prevState) => prevState - 1)}>
-          -
-        </button>
-      </div>
-      <Typography component="legend">Rating</Typography>
-      <Rating
-        name="simple-controlled"
-        value={selectedRating}
-        onChange={(event, newValue) => {
-          setSelectedRating(newValue)
-        }}
-      />
-      {/*<p>selectedRating: {selectedRating}</p>*/}
-      {/*{[1, 2, 3, 4, 5].map((ratingNumber) => {*/}
-      {/*  return (*/}
-      {/*    <button*/}
-      {/*      onClick={() => setSelectedRating(ratingNumber)}*/}
-      {/*      key={ratingNumber}*/}
-      {/*    >*/}
-      {/*      {ratingNumber}*/}
-      {/*    </button>*/}
-      {/*  )*/}
-      {/*})}*/}
+      <button onClick={handleResetButton}>Reset filters</button>
     </div>
   )
 }
