@@ -1,13 +1,6 @@
-import type { MergedHotelWithDetailsType, Occupancy } from '../types/types'
+import type { MergedHotelWithDetailsType } from '../types/types'
 import React, { useEffect, useState } from 'react'
-import {
-  Button,
-  Card,
-  CardActions,
-  CardContent,
-  Rating,
-  Typography,
-} from '@mui/material'
+import { Card, CardContent, Typography } from '@mui/material'
 import HotelBaseInfo from './HotelBaseInfo/HotelBaseInfo'
 import { HotelRoomsInfo } from './HotelRoomsInfo/HotelRoomsInfo'
 
@@ -52,6 +45,7 @@ export const HotelListing = ({
         ({ occupancy }) =>
           numberOfAdults <= occupancy.maxAdults &&
           numberOfChildren <= occupancy.maxChildren &&
+          //maxOverall below
           numberOfAdults + numberOfChildren <=
             occupancy.maxAdults + occupancy.maxChildren,
       )
@@ -87,5 +81,6 @@ export const HotelListing = ({
     </div>
   ) : (
     <Typography variant="h3">No results... Try changing filters</Typography>
+    //Todo: tu mógłby być button z czyszczeniem filtrów
   )
 }

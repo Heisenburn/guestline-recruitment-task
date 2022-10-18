@@ -25,6 +25,7 @@ const Filters = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
+        flexWrap: 'wrap',
       }}
     >
       <FiltersWrapper>

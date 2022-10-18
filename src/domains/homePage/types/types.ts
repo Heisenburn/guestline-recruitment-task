@@ -24,19 +24,10 @@ export interface Facility {
   code: string
 }
 
-export interface Image {
-  url: string
-}
-
 export interface Position {
   latitude: number
   longitude: number
   timezone: string
-}
-
-export interface Image {
-  url: string
-  alt: string
 }
 
 export interface Facility {
@@ -68,7 +59,7 @@ export interface Occupancy {
 
 export interface Image {
   url: string
-  alt: string
+  alt?: string
 }
 
 export interface Facility {
