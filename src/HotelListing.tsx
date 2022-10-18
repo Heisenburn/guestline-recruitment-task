@@ -1,4 +1,12 @@
-import type { MergedHotelWithDetailsType, Occupancy } from './types'
+import type {
+  Facility,
+  Image,
+  MergedHotelWithDetailsType,
+  Occupancy,
+  Position,
+  RatePlan,
+  Room,
+} from './types'
 import React, { useEffect, useState } from 'react'
 
 // Filter based on the capacity of the room. That is, when I have selected 1 adult and 1 child then I am able to see all rooms with at least that capacity. Therefore, I will not be shown any rooms which do not accept children.
@@ -31,32 +39,27 @@ export const HotelListing = ({
       )
     }
 
+    const hotelsMatchingOccupancyFilter: MergedHotelWithDetailsType[] = []
+
     /* Important note: API should always return maxOverall, for hotel ID 3 and 4 it doest not
- therefore I am doing calculation of maxOverall on FE */
-    const hotelsMatchingOccupancyFilter = hotelsMatchingRatingFilter.filter(
-      (hotel) =>
-        hotel.rooms.find(
-          ({ occupancy }) =>
-            numberOfAdults <= occupancy.maxAdults &&
-            numberOfChildren <= occupancy.maxChildren &&
-            numberOfAdults + numberOfChildren <=
-              occupancy.maxAdults + occupancy.maxChildren,
-        ),
-    )
-
-    const hotelsMatchingRatingFilterWithFilteredRooms =
-      hotelsMatchingOccupancyFilter.filter(
-        (hotel) =>
-          (hotel.rooms = hotel.rooms.filter(
-            ({ occupancy }) =>
-              numberOfAdults <= occupancy.maxAdults &&
-              numberOfChildren <= occupancy.maxChildren &&
-              numberOfAdults + numberOfChildren <=
-                occupancy.maxAdults + occupancy.maxChildren,
-          )),
+    therefore I am doing calculation of maxOverall on FE */
+    hotelsMatchingRatingFilter.forEach((hotel) => {
+      const filteredRooms = hotel.rooms.filter(
+        ({ occupancy }) =>
+          numberOfAdults <= occupancy.maxAdults &&
+          numberOfChildren <= occupancy.maxChildren &&
+          numberOfAdults + numberOfChildren <=
+            occupancy.maxAdults + occupancy.maxChildren,
       )
+      if (filteredRooms.length > 0) {
+        hotelsMatchingOccupancyFilter.push({
+          ...hotel,
+          rooms: filteredRooms,
+        })
+      }
+    })
 
-    setListingItems(hotelsMatchingRatingFilterWithFilteredRooms)
+    setListingItems(hotelsMatchingOccupancyFilter)
   }, [data, numberOfAdults, numberOfChildren, selectedRating])
 
   return (
