@@ -4,6 +4,7 @@ import { HotelListing } from './components/HotelListing'
 import { Banner } from './components/Banner/Banner.theme'
 import Filters from './components/Filters/Filters'
 import { fetchHotelsAndSetData } from './helpers/fetchHotelsAndSetData'
+import { Typography } from '@mui/material'
 
 const HomePage = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)

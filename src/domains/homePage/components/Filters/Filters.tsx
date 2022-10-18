@@ -1,5 +1,6 @@
 import React from 'react'
 import { Typography, Rating, Button } from '@mui/material'
+import { CounterWrapper, FiltersWrapper } from './Filters.theme'
 
 interface Props {
   setNumberOfChildren: React.Dispatch<React.SetStateAction<number>>
@@ -18,14 +19,15 @@ const Filters = ({
   numberOfAdults,
   selectedRating,
 }: Props) => {
-  const handleResetButton = () => {
-    setNumberOfChildren(0)
-    setNumberOfAdults(0)
-    setSelectedRating(null)
-  }
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+      }}
+    >
+      <FiltersWrapper>
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <Typography variant="caption">Rating: </Typography>
           <Rating
@@ -37,7 +39,7 @@ const Filters = ({
           />
         </div>
 
-        <div>
+        <CounterWrapper>
           <Typography variant="caption">Adults: </Typography>
 
           <Button
@@ -45,7 +47,7 @@ const Filters = ({
             //TODO: obsłużenie ujemnych wartości
             onClick={() => setNumberOfAdults((prevState) => prevState - 1)}
             size="small"
-            style={{ minWidth: '20px' }}
+            style={{ minWidth: '20px', margin: '0 10px' }}
           >
             -
           </Button>
@@ -54,20 +56,20 @@ const Filters = ({
             variant="outlined"
             onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
             size="small"
-            style={{ minWidth: '20px' }}
+            style={{ minWidth: '20px', margin: '0 10px' }}
           >
             +
           </Button>
-        </div>
+        </CounterWrapper>
 
-        <div>
+        <CounterWrapper>
           <Typography variant="caption">Children: </Typography>
           <Button
             variant="outlined"
             //TODO: obsłużenie ujemnych wartości
             onClick={() => setNumberOfChildren((prevState) => prevState - 1)}
             size="small"
-            style={{ minWidth: '20px' }}
+            style={{ minWidth: '20px', margin: '0 10px' }}
           >
             -
           </Button>
@@ -76,15 +78,12 @@ const Filters = ({
             variant="outlined"
             onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
             size="small"
-            style={{ minWidth: '20px' }}
+            style={{ minWidth: '20px', margin: '0 10px' }}
           >
             +
           </Button>
-        </div>
-      </div>
-      <button style={{ margin: '10px 0' }} onClick={handleResetButton}>
-        Reset filters
-      </button>
+        </CounterWrapper>
+      </FiltersWrapper>
     </div>
   )
 }
