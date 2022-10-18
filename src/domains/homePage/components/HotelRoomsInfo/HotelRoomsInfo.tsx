@@ -1,18 +1,27 @@
 import React from 'react'
-import type { Occupancy, Room } from '../../types/types'
-import { Card } from '@mui/material'
+import type { Room } from '../../types/types'
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Typography,
+} from '@mui/material'
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
 
 export const HotelRoomsInfo = ({ room }: { room: Room }, key: string) => {
   return (
-    <Card key={key}>
-      <p>{room.name}</p>
-      {Object.keys(room.occupancy).map((occupancyKey, index) => {
-        return occupancyKey != 'maxOverall' ? (
-          <p key={index}>
-            {occupancyKey}:{room.occupancy[occupancyKey as keyof Occupancy]}
-          </p>
-        ) : null
-      })}
-    </Card>
+    <Accordion key={key}>
+      <AccordionSummary
+        expandIcon={<ExpandMoreIcon />}
+        aria-controls="panel1a-content"
+        id="panel1a-header"
+      >
+        <Typography>{room.name}</Typography>
+      </AccordionSummary>
+      <AccordionDetails>
+        <Typography>Adults: {room.occupancy.maxAdults}</Typography>
+        <Typography>Children: {room.occupancy.maxChildren}</Typography>
+      </AccordionDetails>
+    </Accordion>
   )
 }
