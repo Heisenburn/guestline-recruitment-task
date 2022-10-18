@@ -50,14 +50,14 @@ const HomePage = (): JSX.Element => {
           selectedRating={selectedRating}
         />
       ) : (
-        <Stack spacing={1}>
+        <Stack spacing={1} style={{ display: 'flex', alignItems: 'center' }}>
           {/*Estimated number of items*/}
           {[1, 2, 3, 4].map((item) => {
             return (
               <Skeleton
                 key={item}
                 variant="rectangular"
-                width="100%"
+                width="90%"
                 height={300}
                 animation="wave"
               />

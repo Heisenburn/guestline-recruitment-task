@@ -62,9 +62,15 @@ export const HotelListing = ({
   }, [data, numberOfAdults, numberOfChildren, selectedRating])
 
   return listingItems.length > 0 ? (
-    <>
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+      }}
+    >
       {listingItems.map((hotel) => (
-        <Card key={hotel.id} sx={{ margin: '10px' }}>
+        <Card key={hotel.id} sx={{ margin: '10px', width: '90%' }}>
           <CardContent>
             <HotelBaseInfo hotel={hotel} key={hotel.id} />
             {hotel.rooms.map((room) => (
@@ -73,7 +79,7 @@ export const HotelListing = ({
           </CardContent>
         </Card>
       ))}
-    </>
+    </div>
   ) : (
     <Typography variant="h3">No results... Try changing filters</Typography>
   )

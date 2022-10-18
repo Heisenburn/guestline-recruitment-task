@@ -8,7 +8,12 @@ const HotelBaseInfo = (
 ) => {
   return (
     <Card key={key} sx={{ margin: '10px 0' }}>
-      <CardContent>
+      <CardContent
+        style={{
+          display: 'flex',
+          justifyContent: 'space-around',
+        }}
+      >
         <p>Tutaj galeria zdjec</p>
         <Typography gutterBottom variant="h5" component="div">
           {hotel.name}
