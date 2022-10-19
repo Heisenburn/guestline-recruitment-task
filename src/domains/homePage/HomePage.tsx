@@ -8,7 +8,6 @@ import {
   StyledStack,
   StyledSkeleton,
 } from './components/Skeleton/Skeleton.theme'
-import { CircularProgress } from '@mui/material'
 import { DEFAULT_FILTER_VALUES } from './constants/constants'
 
 const HomePage = (): JSX.Element => {

@@ -48,34 +48,30 @@ export const HotelListing = ({
 
   return (
     <HotelListingContainer>
-      {
-        listingItems.length > 0 ? (
-          listingItems.map((hotel) => (
-            <StyledCard key={hotel.id}>
-              <CardContent>
-                <HotelBaseInfo hotel={hotel} />
-                {hotel.rooms.map((room) => (
-                  <HotelRoomsInfo room={room} key={room.id} />
-                ))}
-              </CardContent>
-            </StyledCard>
-          ))
-        ) : (
-          <>
-            <Typography variant="h5">
-              No results... Try changing filters
-            </Typography>
-            <StyledButton
-              variant="outlined"
-              onClick={() => setSelectedFilters(DEFAULT_FILTER_VALUES)}
-            >
-              Reset filters
-            </StyledButton>
-          </>
-        )
-
-        //TODO: i też czyszczenie filtrów mogłoby się pojawiać po 1szym ustawieniu filtra jakiekolwiek
-      }
+      {listingItems.length > 0 ? (
+        listingItems.map((hotel) => (
+          <StyledCard key={hotel.id}>
+            <CardContent>
+              <HotelBaseInfo hotel={hotel} />
+              {hotel.rooms.map((room) => (
+                <HotelRoomsInfo room={room} key={room.id} />
+              ))}
+            </CardContent>
+          </StyledCard>
+        ))
+      ) : (
+        <>
+          <Typography variant="h5">
+            No results... Try changing filters
+          </Typography>
+          <StyledButton
+            variant="outlined"
+            onClick={() => setSelectedFilters(DEFAULT_FILTER_VALUES)}
+          >
+            Reset filters
+          </StyledButton>
+        </>
+      )}
     </HotelListingContainer>
   )
 }
