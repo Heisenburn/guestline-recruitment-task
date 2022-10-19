@@ -1,8 +1,8 @@
-import type { MergedHotelWithDetailsType } from '../types/types'
+import type { MergedHotelWithDetailsType } from '../../types/types'
 import React, { useEffect, useState } from 'react'
 import { Card, CardContent, Typography } from '@mui/material'
-import HotelBaseInfo from './HotelBaseInfo/HotelBaseInfo'
-import { HotelRoomsInfo } from './HotelRoomsInfo/HotelRoomsInfo'
+import HotelBaseInfo from '../HotelBaseInfo/HotelBaseInfo'
+import { HotelRoomsInfo } from '../HotelRoomsInfo/HotelRoomsInfo'
 
 interface Props {
   data: MergedHotelWithDetailsType[]

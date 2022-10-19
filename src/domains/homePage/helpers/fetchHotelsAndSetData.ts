@@ -2,7 +2,7 @@ import {
   HOTELS_BASIC_DATA_FETCH_URL,
   ROOM_DETAILS_FETCH_URL_PREFIX,
 } from '../constants/constants'
-import {
+import type {
   HotelDetailsResponse,
   HotelsRootData,
   MergedHotelWithDetailsType,

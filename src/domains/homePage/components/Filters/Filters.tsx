@@ -1,6 +1,11 @@
 import React from 'react'
 import { Typography, Rating, Button } from '@mui/material'
-import { CounterWrapper, FiltersWrapper } from './Filters.theme'
+import {
+  CounterWrapper,
+  FiltersWrapper,
+  RatingWrapper,
+  StyledButton,
+} from './Filters.theme'
 
 interface Props {
   setNumberOfChildren: React.Dispatch<React.SetStateAction<number>>
@@ -20,70 +25,55 @@ const Filters = ({
   selectedRating,
 }: Props) => {
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <FiltersWrapper>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography>Rating: </Typography>
-          <Rating
-            value={selectedRating}
-            onChange={(event, newValue) => {
-              setSelectedRating(newValue)
-            }}
-          />
-        </div>
-
-        <CounterWrapper>
-          <Typography>Adults: </Typography>
-
-          <Button
-            variant="outlined"
-            //TODO: obsłużenie ujemnych wartości
-            onClick={() => setNumberOfAdults((prevState) => prevState - 1)}
-            size="small"
-            style={{ minWidth: '20px', margin: '0 10px' }}
-          >
-            -
-          </Button>
-          <Typography>{numberOfAdults} </Typography>
-          <Button
-            variant="outlined"
-            onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
-            size="small"
-            style={{ minWidth: '20px', margin: '0 10px' }}
-          >
-            +
-          </Button>
-        </CounterWrapper>
-
-        <CounterWrapper>
-          <Typography>Children: </Typography>
-          <Button
-            variant="outlined"
-            //TODO: obsłużenie ujemnych wartości
-            onClick={() => setNumberOfChildren((prevState) => prevState - 1)}
-            size="small"
-            style={{ minWidth: '20px', margin: '0 10px' }}
-          >
-            -
-          </Button>
-          <Typography variant="caption">{numberOfChildren} </Typography>
-          <Button
-            variant="outlined"
-            onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
-            size="small"
-            style={{ minWidth: '20px', margin: '0 10px' }}
-          >
-            +
-          </Button>
-        </CounterWrapper>
-      </FiltersWrapper>
-    </div>
+    <FiltersWrapper>
+      <RatingWrapper>
+        <Typography>Rating: </Typography>
+        <Rating
+          value={selectedRating}
+          onChange={(event, newValue) => {
+            setSelectedRating(newValue)
+          }}
+        />
+      </RatingWrapper>
+      <CounterWrapper>
+        <Typography>Adults: </Typography>
+        <StyledButton
+          variant="outlined"
+          //TODO: obsłużenie ujemnych wartości
+          onClick={() => setNumberOfAdults((prevState) => prevState - 1)}
+          size="small"
+        >
+          -
+        </StyledButton>
+        <Typography>{numberOfAdults} </Typography>
+        <StyledButton
+          variant="outlined"
+          onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
+          size="small"
+        >
+          +
+        </StyledButton>
+      </CounterWrapper>
+      <CounterWrapper>
+        <Typography>Children: </Typography>
+        <StyledButton
+          variant="outlined"
+          //TODO: obsłużenie ujemnych wartości
+          onClick={() => setNumberOfChildren((prevState) => prevState - 1)}
+          size="small"
+        >
+          -
+        </StyledButton>
+        <Typography variant="caption">{numberOfChildren} </Typography>
+        <StyledButton
+          variant="outlined"
+          onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
+          size="small"
+        >
+          +
+        </StyledButton>
+      </CounterWrapper>
+    </FiltersWrapper>
   )
 }
 

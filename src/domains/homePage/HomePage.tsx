@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { MergedHotelWithDetailsType } from './types/types'
-import { HotelListing } from './components/HotelListing'
+import { HotelListing } from './components/HotelListing/HotelListing'
 import { Banner } from './components/Banner/Banner.theme'
 import Filters from './components/Filters/Filters'
 import { fetchHotelsAndSetData } from './helpers/fetchHotelsAndSetData'
-import { Skeleton, Stack } from '@mui/material'
+import {
+  StyledStack,
+  StyledSkeleton,
+} from './components/Skeleton/Skeleton.theme'
 
 const HomePage = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
@@ -49,20 +52,19 @@ const HomePage = (): JSX.Element => {
           selectedRating={selectedRating}
         />
       ) : (
-        <Stack spacing={1} style={{ display: 'flex', alignItems: 'center' }}>
+        <StyledStack spacing={1}>
           {/*Estimated number of hotels*/}
           {[1, 2, 3, 4].map((item) => {
             return (
-              <Skeleton
+              <StyledSkeleton
                 key={item}
                 variant="rectangular"
-                width="90%"
-                height={300}
+                height={250}
                 animation="wave"
               />
             )
           })}
-        </Stack>
+        </StyledStack>
       )}
     </>
   )

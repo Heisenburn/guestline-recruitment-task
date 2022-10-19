@@ -1,10 +1,13 @@
 import styled from 'styled-components'
+import { Button } from '@mui/material'
 
 export const FiltersWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   flex: 500px;
   position: relative;
+  left: 50%;
+  transform: translateX(-50%);
   bottom: 75px;
   background-color: white;
   max-width: 650px;
@@ -19,6 +22,8 @@ export const FiltersWrapper = styled.div`
     flex-direction: column;
     align-items: center;
     gap: 10px;
+    left: 0;
+    transform: translateX(0);
   }
 `
 export const CounterWrapper = styled.div`
@@ -27,4 +32,15 @@ export const CounterWrapper = styled.div`
   & > button {
     width: 30px;
   }
+`
+
+export const RatingWrapper = styled.div`
+  display: flex;
+  align-items: center;
+`
+
+export const StyledButton = styled(Button)`
+  //!important needed to overwrite styles from lib
+  min-width: 20px !important;
+  margin: 0 10px !important;
 `
