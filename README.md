@@ -1,4 +1,4 @@
-# Guestline Senior Frontend recruitment task
+# Guestline Recruitment Task
 
 Project created for Guestline Senior Frontend recruitment task
 
