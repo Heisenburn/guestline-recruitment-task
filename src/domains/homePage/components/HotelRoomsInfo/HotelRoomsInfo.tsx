@@ -19,16 +19,16 @@ export const HotelRoomsInfo = ({ room }: { room: Room }, key: string) => {
         <Typography>{room.name}</Typography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography>
+        <Typography paddingBottom={0.5}>
           <strong>Adults:</strong> {room.occupancy.maxAdults}
         </Typography>
-        <Typography>
+        <Typography paddingBottom={0.5}>
           <strong>Children:</strong> {room.occupancy.maxChildren}
         </Typography>
-        <Typography>
+        <Typography paddingBottom={0.5}>
           <strong>Type:</strong> {room.bedConfiguration}
         </Typography>
-        <Typography>
+        <Typography paddingBottom={0.5}>
           <strong>Description:</strong> {room.longDescription}
         </Typography>
       </AccordionDetails>

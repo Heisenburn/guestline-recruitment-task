@@ -25,14 +25,12 @@ const Filters = ({
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        flexWrap: 'wrap',
       }}
     >
       <FiltersWrapper>
         <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Typography variant="caption">Rating: </Typography>
+          <Typography>Rating: </Typography>
           <Rating
-            size="small"
             value={selectedRating}
             onChange={(event, newValue) => {
               setSelectedRating(newValue)
@@ -41,7 +39,7 @@ const Filters = ({
         </div>
 
         <CounterWrapper>
-          <Typography variant="caption">Adults: </Typography>
+          <Typography>Adults: </Typography>
 
           <Button
             variant="outlined"
@@ -52,7 +50,7 @@ const Filters = ({
           >
             -
           </Button>
-          <Typography variant="caption">{numberOfAdults} </Typography>
+          <Typography>{numberOfAdults} </Typography>
           <Button
             variant="outlined"
             onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
@@ -64,7 +62,7 @@ const Filters = ({
         </CounterWrapper>
 
         <CounterWrapper>
-          <Typography variant="caption">Children: </Typography>
+          <Typography>Children: </Typography>
           <Button
             variant="outlined"
             //TODO: obsłużenie ujemnych wartości

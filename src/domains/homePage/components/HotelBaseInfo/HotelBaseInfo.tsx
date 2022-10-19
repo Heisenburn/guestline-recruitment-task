@@ -3,7 +3,12 @@ import React, { useCallback } from 'react'
 import type { Image, MergedHotelWithDetailsType } from '../../types/types'
 import 'react-image-gallery/styles/css/image-gallery.css'
 import ImageGallery from 'react-image-gallery'
-import { ImageGalleryWrapper } from './HotelBaseInfo.theme'
+import {
+  ImageGalleryWrapper,
+  HotelBaseInfoWrapper,
+  ImageAndInfoWrapper,
+  TypographyWrapper,
+} from './HotelBaseInfo.theme'
 
 const HotelBaseInfo = (
   { hotel }: { hotel: MergedHotelWithDetailsType },
@@ -45,33 +50,35 @@ const HotelBaseInfo = (
     return hotelBaseImagesWithRoomsImages
   }, [hotel.images, hotel.rooms])
 
+  //TODO: image gallery jako osobny komponent?
   return (
-    <div
-      key={key}
-      style={{
-        margin: '10px 0',
-        display: 'flex',
-        justifyContent: 'space-around',
-      }}
-    >
-      <ImageGalleryWrapper>
-        <ImageGallery
-          infinite={true}
-          showThumbnails={false}
-          showFullscreenButton={false}
-          showPlayButton={false}
-          items={getImageGallerySet()}
-        />
-      </ImageGalleryWrapper>
-
-      <Typography gutterBottom variant="h5" component="div">
-        {hotel.name}
-      </Typography>
-      <Typography sx={{ mb: 1.5 }} color="text.secondary">
-        {hotel.address1}
-      </Typography>
+    <HotelBaseInfoWrapper key={key}>
+      <ImageAndInfoWrapper>
+        <ImageGalleryWrapper>
+          <ImageGallery
+            infinite={true}
+            showThumbnails={false}
+            showFullscreenButton={false}
+            showPlayButton={false}
+            items={getImageGallerySet()}
+          />
+        </ImageGalleryWrapper>
+        <TypographyWrapper>
+          <Typography gutterBottom variant="h5" component="div">
+            {hotel.name}
+          </Typography>
+          <Typography sx={{ mb: 1 }} color="text.secondary">
+            {hotel.address1}
+          </Typography>
+          {hotel.address2 && (
+            <Typography sx={{ mb: 1 }} color="text.secondary">
+              {hotel.address2}
+            </Typography>
+          )}
+        </TypographyWrapper>
+      </ImageAndInfoWrapper>
       <Rating name="read-only" value={parseInt(hotel.starRating)} readOnly />
-    </div>
+    </HotelBaseInfoWrapper>
   )
 }
 
