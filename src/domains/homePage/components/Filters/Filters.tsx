@@ -26,7 +26,7 @@ const Filters = ({ selectedFilters, setSelectedFilters }: Props) => {
             setSelectedFilters((prevState: FiltersType) => {
               return {
                 ...prevState,
-                rating: newValue,
+                selectedRating: newValue,
               }
             })
           }}

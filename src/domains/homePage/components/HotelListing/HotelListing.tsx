@@ -3,10 +3,15 @@ import React, { useEffect, useState } from 'react'
 import { CardContent, Typography } from '@mui/material'
 import HotelBaseInfo from '../HotelBaseInfo/HotelBaseInfo'
 import { HotelRoomsInfo } from '../HotelRoomsInfo/HotelRoomsInfo'
-import { HotelListingContainer, StyledCard } from './HotelListing.theme'
+import {
+  HotelListingContainer,
+  StyledCard,
+  StyledButton,
+} from './HotelListing.theme'
 import getDataAfterFilteringByRating from '../../helpers/getDataAfterFilteringByRating'
 import { getDataAfterFilteringHotelsByOccupancy } from '../../helpers/getDataAfterFilteringHotelsByOccupancy'
 import { FiltersType } from '../../types/types'
+import { DEFAULT_FILTER_VALUES } from '../../constants/constants'
 
 interface Props {
   data: MergedHotelWithDetailsType[]
@@ -56,11 +61,19 @@ export const HotelListing = ({
             </StyledCard>
           ))
         ) : (
-          <Typography variant="h5">
-            No results... Try changing filters
-          </Typography>
+          <>
+            <Typography variant="h5">
+              No results... Try changing filters
+            </Typography>
+            <StyledButton
+              variant="outlined"
+              onClick={() => setSelectedFilters(DEFAULT_FILTER_VALUES)}
+            >
+              Reset filters
+            </StyledButton>
+          </>
         )
-        //Todo: tu mógłby być button z czyszczeniem filtrów
+
         //TODO: i też czyszczenie filtrów mogłoby się pojawiać po 1szym ustawieniu filtra jakiekolwiek
       }
     </HotelListingContainer>

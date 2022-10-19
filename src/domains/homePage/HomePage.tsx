@@ -9,6 +9,7 @@ import {
   StyledSkeleton,
 } from './components/Skeleton/Skeleton.theme'
 import { CircularProgress } from '@mui/material'
+import { DEFAULT_FILTER_VALUES } from './constants/constants'
 
 const HomePage = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
@@ -29,14 +30,8 @@ const HomePage = (): JSX.Element => {
     }
   }, [])
 
-  // const [numberOfChildren, setNumberOfChildren] = useState(0)
-  // const [numberOfAdults, setNumberOfAdults] = useState(0)
-  // const [selectedRating, setSelectedRating] = useState<number | null>(null)
-
   const [selectedFilters, setSelectedFilters] = useState<FiltersType>({
-    numberOfChildren: 0,
-    numberOfAdults: 0,
-    selectedRating: null,
+    ...DEFAULT_FILTER_VALUES,
   })
 
   return (

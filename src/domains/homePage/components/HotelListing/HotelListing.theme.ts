@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Card } from '@mui/material'
+import { Button, Card } from '@mui/material'
 import { MOBILE_MEDIA_QUERY_WIDTH } from '../../constants/constants'
 
 export const HotelListingContainer = styled.div`
@@ -15,4 +15,9 @@ export const StyledCard = styled(Card)`
   @media only screen and (max-width: ${MOBILE_MEDIA_QUERY_WIDTH}) {
     width: 90%;
   }
+`
+
+export const StyledButton = styled(Button)`
+  //!important needed to overwrite lib styles
+  margin-top: 10px !important;
 `
