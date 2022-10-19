@@ -29,11 +29,9 @@ const HomePage = (): JSX.Element => {
   const [numberOfAdults, setNumberOfAdults] = useState(0)
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
-  //TODO: posortować hotele od najniższej wartości ratingu
   return (
     <>
       <Banner />
-
       <Filters
         //TODO: może lepiej jeden stan trzymający wszystkie filtry?
         setNumberOfChildren={setNumberOfChildren}

@@ -4,9 +4,6 @@ import { Card, CardContent, Typography } from '@mui/material'
 import HotelBaseInfo from './HotelBaseInfo/HotelBaseInfo'
 import { HotelRoomsInfo } from './HotelRoomsInfo/HotelRoomsInfo'
 
-//TODO: View all images of the displayed hotel
-//TODO:  See hotel details (including hotel name, address and star rating) and room details (including room type, max adults, max children and long description)
-
 interface Props {
   data: MergedHotelWithDetailsType[]
   numberOfChildren: number
