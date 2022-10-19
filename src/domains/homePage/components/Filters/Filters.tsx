@@ -6,24 +6,16 @@ import {
   RatingWrapper,
   StyledButton,
 } from './Filters.theme'
+import { FiltersType } from '../../types/types'
 
 interface Props {
-  setNumberOfChildren: React.Dispatch<React.SetStateAction<number>>
-  setNumberOfAdults: React.Dispatch<React.SetStateAction<number>>
-  setSelectedRating: React.Dispatch<React.SetStateAction<number | null>>
-  numberOfChildren: number
-  numberOfAdults: number
-  selectedRating: number | null
+  selectedFilters: FiltersType
+  setSelectedFilters: React.Dispatch<React.SetStateAction<FiltersType>>
 }
 
-const Filters = ({
-  setNumberOfChildren,
-  setNumberOfAdults,
-  setSelectedRating,
-  numberOfChildren,
-  numberOfAdults,
-  selectedRating,
-}: Props) => {
+const Filters = ({ selectedFilters, setSelectedFilters }: Props) => {
+  const { numberOfAdults, numberOfChildren, selectedRating } = selectedFilters
+
   return (
     <FiltersWrapper>
       <RatingWrapper>
@@ -31,7 +23,12 @@ const Filters = ({
         <Rating
           value={selectedRating}
           onChange={(event, newValue) => {
-            setSelectedRating(newValue)
+            setSelectedFilters((prevState: FiltersType) => {
+              return {
+                ...prevState,
+                rating: newValue,
+              }
+            })
           }}
         />
       </RatingWrapper>
@@ -39,8 +36,17 @@ const Filters = ({
         <Typography>Adults: </Typography>
         <StyledButton
           variant="outlined"
-          //TODO: obsłużenie ujemnych wartości
-          onClick={() => setNumberOfAdults((prevState) => prevState - 1)}
+          onClick={() => {
+            setSelectedFilters((prevState: FiltersType) => {
+              const numberOfAdultsAfterDecrementing =
+                prevState.numberOfAdults == 0 ? 0 : prevState.numberOfAdults - 1
+
+              return {
+                ...prevState,
+                numberOfAdults: numberOfAdultsAfterDecrementing,
+              }
+            })
+          }}
           size="small"
         >
           -
@@ -48,7 +54,16 @@ const Filters = ({
         <Typography>{numberOfAdults} </Typography>
         <StyledButton
           variant="outlined"
-          onClick={() => setNumberOfAdults((prevState) => prevState + 1)}
+          onClick={() => {
+            //todo: może wynieśc do wspólne funkcji dla odejmowania i dodawania?
+            //todo: całe komponenty się powtarzają
+            setSelectedFilters((prevState: FiltersType) => {
+              return {
+                ...prevState,
+                numberOfAdults: prevState.numberOfAdults + 1,
+              }
+            })
+          }}
           size="small"
         >
           +
@@ -58,8 +73,19 @@ const Filters = ({
         <Typography>Children: </Typography>
         <StyledButton
           variant="outlined"
-          //TODO: obsłużenie ujemnych wartości
-          onClick={() => setNumberOfChildren((prevState) => prevState - 1)}
+          onClick={() => {
+            setSelectedFilters((prevState: FiltersType) => {
+              const numberOfChildrenAfterDecrementing =
+                prevState.numberOfChildren == 0
+                  ? 0
+                  : prevState.numberOfChildren - 1
+
+              return {
+                ...prevState,
+                numberOfChildren: numberOfChildrenAfterDecrementing,
+              }
+            })
+          }}
           size="small"
         >
           -
@@ -67,7 +93,14 @@ const Filters = ({
         <Typography variant="caption">{numberOfChildren} </Typography>
         <StyledButton
           variant="outlined"
-          onClick={() => setNumberOfChildren((prevState) => prevState + 1)}
+          onClick={() => {
+            setSelectedFilters((prevState: FiltersType) => {
+              return {
+                ...prevState,
+                numberOfChildren: prevState.numberOfChildren + 1,
+              }
+            })
+          }}
           size="small"
         >
           +

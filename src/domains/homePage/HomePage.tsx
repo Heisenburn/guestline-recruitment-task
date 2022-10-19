@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
-import { MergedHotelWithDetailsType } from './types/types'
+import { FiltersType, MergedHotelWithDetailsType } from './types/types'
 import { HotelListing } from './components/HotelListing/HotelListing'
 import { Banner } from './components/Banner/Banner.theme'
 import Filters from './components/Filters/Filters'
@@ -29,38 +29,29 @@ const HomePage = (): JSX.Element => {
     }
   }, [])
 
-  const [numberOfChildren, setNumberOfChildren] = useState(0)
-  const [numberOfAdults, setNumberOfAdults] = useState(0)
-  const [selectedRating, setSelectedRating] = useState<number | null>(null)
+  // const [numberOfChildren, setNumberOfChildren] = useState(0)
+  // const [numberOfAdults, setNumberOfAdults] = useState(0)
+  // const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
-  //todo: co z tym spinerem
-  const [shouldDisplayProgress, setShouldDisplayProgress] = useState(false)
-
-  // useEffect(() => {
-  //   setShouldDisplayProgress(true)
-  // }, [numberOfChildren])
+  const [selectedFilters, setSelectedFilters] = useState<FiltersType>({
+    numberOfChildren: 0,
+    numberOfAdults: 0,
+    selectedRating: null,
+  })
 
   return (
     <>
       <Banner />
       <Filters
-        //TODO: może lepiej jeden stan trzymający wszystkie filtry?
-        setNumberOfChildren={setNumberOfChildren}
-        setNumberOfAdults={setNumberOfAdults}
-        setSelectedRating={setSelectedRating}
-        numberOfChildren={numberOfChildren}
-        numberOfAdults={numberOfAdults}
-        selectedRating={selectedRating}
+        selectedFilters={selectedFilters}
+        setSelectedFilters={setSelectedFilters}
       />
-      {shouldDisplayProgress && (
-        <CircularProgress style={{ position: 'relative', left: '50%' }} />
-      )}
+
       {data ? (
         <HotelListing
           data={data}
-          numberOfChildren={numberOfChildren}
-          numberOfAdults={numberOfAdults}
-          selectedRating={selectedRating}
+          selectedFilters={selectedFilters}
+          setSelectedFilters={setSelectedFilters}
         />
       ) : (
         <StyledStack spacing={1}>

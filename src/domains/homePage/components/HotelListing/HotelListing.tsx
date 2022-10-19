@@ -6,23 +6,24 @@ import { HotelRoomsInfo } from '../HotelRoomsInfo/HotelRoomsInfo'
 import { HotelListingContainer, StyledCard } from './HotelListing.theme'
 import getDataAfterFilteringByRating from '../../helpers/getDataAfterFilteringByRating'
 import { getDataAfterFilteringHotelsByOccupancy } from '../../helpers/getDataAfterFilteringHotelsByOccupancy'
+import { FiltersType } from '../../types/types'
 
 interface Props {
   data: MergedHotelWithDetailsType[]
-  numberOfChildren: number
-  numberOfAdults: number
-  selectedRating: number | null
+  selectedFilters: FiltersType
+  setSelectedFilters: React.Dispatch<React.SetStateAction<FiltersType>>
 }
 
 export const HotelListing = ({
   data,
-  numberOfChildren,
-  numberOfAdults,
-  selectedRating,
+  selectedFilters,
+  setSelectedFilters,
 }: Props): JSX.Element => {
   const [listingItems, setListingItems] = useState(data)
 
   useEffect(() => {
+    const { selectedRating, numberOfChildren, numberOfAdults } = selectedFilters
+
     let hotelsMatchingRatingFilter = data
     if (selectedRating) {
       hotelsMatchingRatingFilter = getDataAfterFilteringByRating(
@@ -38,7 +39,7 @@ export const HotelListing = ({
         numberOfChildren,
       )
     setListingItems(hotelsMatchingOccupancyFilter)
-  }, [data, numberOfAdults, numberOfChildren, selectedRating])
+  }, [data, selectedFilters])
 
   return (
     <HotelListingContainer>

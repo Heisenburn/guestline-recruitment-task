@@ -88,3 +88,9 @@ export interface CancellationPolicy {
 }
 
 export type MergedHotelWithDetailsType = HotelsRootData & HotelDetailsResponse
+
+export type FiltersType = {
+  numberOfChildren: number
+  numberOfAdults: number
+  selectedRating: null | number
+}
