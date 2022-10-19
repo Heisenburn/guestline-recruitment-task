@@ -7,4 +7,14 @@ Project created for Guestline Senior Frontend recruitment task
 ## Local
 ### `npm start`
 
+## Configuration/stack:
+
+- Typescript
+- React
+- Styled Components
+- MUI (Google Material Design) - UI Library
+- Prettier
+- Eslint
+- react-helmet
+- react-image-gallery
  
