@@ -17,6 +17,11 @@ export const ImageGalleryWrapper = styled.div`
   .image-gallery-right-nav .image-gallery-svg {
     height: 60px;
     width: 60px;
+    opacity: 0.5;
+    &:hover {
+      opacity: 1;
+      color: white;
+    }
   }
 
   .image-gallery-left-nav,

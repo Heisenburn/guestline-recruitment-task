@@ -22,7 +22,7 @@ export const FiltersWrapper = styled.div`
   @media only screen and (max-width: ${MOBILE_MEDIA_QUERY_WIDTH}) {
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 40px;
     left: 0;
     transform: translateX(0);
     flex-flow: wrap;

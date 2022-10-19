@@ -94,3 +94,6 @@ export type FiltersType = {
   numberOfAdults: number
   selectedRating: null | number
 }
+
+export type FiltersFactoryType = 'rating' | 'counter'
+export type FiltersFactoryLabel = 'Children' | 'Adults' | 'Rating'
