@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Button } from '@mui/material'
+import { MOBILE_MEDIA_QUERY_WIDTH } from '../../constants/constants'
 
 export const FiltersWrapper = styled.div`
   display: flex;
@@ -18,7 +19,7 @@ export const FiltersWrapper = styled.div`
   padding: 20px;
   margin: 20px;
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: ${MOBILE_MEDIA_QUERY_WIDTH}) {
     flex-direction: column;
     align-items: center;
     gap: 10px;

@@ -3,6 +3,12 @@ import React, { useEffect, useState } from 'react'
 import { Card, CardContent, Typography } from '@mui/material'
 import HotelBaseInfo from '../HotelBaseInfo/HotelBaseInfo'
 import { HotelRoomsInfo } from '../HotelRoomsInfo/HotelRoomsInfo'
+<<<<<<< Updated upstream
+=======
+import { HotelListingContainer, StyledCard } from './HotelListing.theme'
+import getDataAfterFilteringByRating from '../../helpers/getDataAfterFilteringByRating'
+import { getDataAfterFilteringHotelsByOccupancy } from '../../helpers/getDataAfterFilteringHotelsByOccupancy'
+>>>>>>> Stashed changes
 
 interface Props {
   data: MergedHotelWithDetailsType[]
@@ -21,42 +27,23 @@ export const HotelListing = ({
 
   useEffect(() => {
     let hotelsMatchingRatingFilter = data
-
     if (selectedRating) {
-      hotelsMatchingRatingFilter = data.filter(
-        (hotel) => selectedRating <= parseInt(hotel.starRating),
-      )
-      //sort by ratingNumber from lowest to highest (not in the requirements but improves UX)
-      hotelsMatchingRatingFilter = hotelsMatchingRatingFilter.sort(
-        (hotelA, hotelB) =>
-          parseInt(hotelA.starRating) - parseInt(hotelB.starRating),
+      hotelsMatchingRatingFilter = getDataAfterFilteringByRating(
+        data,
+        selectedRating,
       )
     }
 
-    const hotelsMatchingOccupancyFilter: MergedHotelWithDetailsType[] = []
-
-    /* Important note: API should always return maxOverall, for hotel ID 3 and 4 it doest not
-    therefore I am doing calculation of maxOverall on FE */
-    hotelsMatchingRatingFilter.forEach((hotel) => {
-      const filteredRooms = hotel.rooms.filter(
-        ({ occupancy }) =>
-          numberOfAdults <= occupancy.maxAdults &&
-          numberOfChildren <= occupancy.maxChildren &&
-          //maxOverall below
-          numberOfAdults + numberOfChildren <=
-            occupancy.maxAdults + occupancy.maxChildren,
+    const hotelsMatchingOccupancyFilter =
+      getDataAfterFilteringHotelsByOccupancy(
+        hotelsMatchingRatingFilter,
+        numberOfAdults,
+        numberOfChildren,
       )
-      if (filteredRooms.length > 0) {
-        hotelsMatchingOccupancyFilter.push({
-          ...hotel,
-          rooms: filteredRooms,
-        })
-      }
-    })
-
     setListingItems(hotelsMatchingOccupancyFilter)
   }, [data, numberOfAdults, numberOfChildren, selectedRating])
 
+<<<<<<< Updated upstream
   return listingItems.length > 0 ? (
     <div
       style={{
@@ -79,5 +66,30 @@ export const HotelListing = ({
   ) : (
     <Typography variant="h3">No results... Try changing filters</Typography>
     //Todo: tu mógłby być button z czyszczeniem filtrów
+=======
+  return (
+    <HotelListingContainer>
+      {
+        listingItems.length > 0 ? (
+          listingItems.map((hotel) => (
+            <StyledCard key={hotel.id}>
+              <CardContent>
+                <HotelBaseInfo hotel={hotel} />
+                {hotel.rooms.map((room) => (
+                  <HotelRoomsInfo room={room} key={room.id} />
+                ))}
+              </CardContent>
+            </StyledCard>
+          ))
+        ) : (
+          <Typography variant="h5">
+            No results... Try changing filters
+          </Typography>
+        )
+        //Todo: tu mógłby być button z czyszczeniem filtrów
+        //TODO: i też czyszczenie filtrów mogłoby się pojawiać po 1szym ustawieniu filtra jakiekolwiek
+      }
+    </HotelListingContainer>
+>>>>>>> Stashed changes
   )
 }

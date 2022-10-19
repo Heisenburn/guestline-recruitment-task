@@ -8,6 +8,7 @@ import {
   StyledStack,
   StyledSkeleton,
 } from './components/Skeleton/Skeleton.theme'
+import { CircularProgress } from '@mui/material'
 
 const HomePage = (): JSX.Element => {
   const [data, setData] = useState<MergedHotelWithDetailsType[] | null>(null)
@@ -32,6 +33,13 @@ const HomePage = (): JSX.Element => {
   const [numberOfAdults, setNumberOfAdults] = useState(0)
   const [selectedRating, setSelectedRating] = useState<number | null>(null)
 
+  //todo: co z tym spinerem
+  const [shouldDisplayProgress, setShouldDisplayProgress] = useState(false)
+
+  // useEffect(() => {
+  //   setShouldDisplayProgress(true)
+  // }, [numberOfChildren])
+
   return (
     <>
       <Banner />
@@ -44,6 +52,9 @@ const HomePage = (): JSX.Element => {
         numberOfAdults={numberOfAdults}
         selectedRating={selectedRating}
       />
+      {shouldDisplayProgress && (
+        <CircularProgress style={{ position: 'relative', left: '50%' }} />
+      )}
       {data ? (
         <HotelListing
           data={data}

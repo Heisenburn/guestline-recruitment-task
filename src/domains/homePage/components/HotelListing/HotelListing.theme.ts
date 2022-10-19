@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import { Card } from '@mui/material'
+import { MOBILE_MEDIA_QUERY_WIDTH } from '../../constants/constants'
 
 export const HotelListingContainer = styled.div`
   display: flex;
@@ -9,5 +10,9 @@ export const HotelListingContainer = styled.div`
 
 export const StyledCard = styled(Card)`
   margin: 10px;
-  width: 90%;
+  width: 70%;
+
+  @media only screen and (max-width: ${MOBILE_MEDIA_QUERY_WIDTH}) {
+    width: 90%;
+  }
 `

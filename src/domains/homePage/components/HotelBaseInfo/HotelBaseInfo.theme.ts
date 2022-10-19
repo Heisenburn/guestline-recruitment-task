@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { MOBILE_MEDIA_QUERY_WIDTH } from '../../constants/constants'
 
 export const ImageGalleryWrapper = styled.div`
   .image-gallery-image {
@@ -6,7 +7,7 @@ export const ImageGalleryWrapper = styled.div`
     height: 200px;
     object-fit: cover;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: ${MOBILE_MEDIA_QUERY_WIDTH}) {
       width: 100%;
       height: auto;
     }
@@ -35,8 +36,7 @@ export const ImageAndInfoWrapper = styled.div`
   display: flex;
   flex-direction: row;
 
-  //TODO: wyciągnąxc do zmiennej maxWidth
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: ${MOBILE_MEDIA_QUERY_WIDTH}) {
     flex-direction: column;
   }
 `
