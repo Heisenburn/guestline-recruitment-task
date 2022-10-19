@@ -1,8 +1,9 @@
-import type { MergedHotelWithDetailsType } from '../types/types'
+import type { MergedHotelWithDetailsType } from '../../types/types'
 import React, { useEffect, useState } from 'react'
-import { Card, CardContent, Typography } from '@mui/material'
-import HotelBaseInfo from './HotelBaseInfo/HotelBaseInfo'
-import { HotelRoomsInfo } from './HotelRoomsInfo/HotelRoomsInfo'
+import { CardContent, Typography } from '@mui/material'
+import HotelBaseInfo from '../HotelBaseInfo/HotelBaseInfo'
+import { HotelRoomsInfo } from '../HotelRoomsInfo/HotelRoomsInfo'
+import { HotelListingContainer, StyledCard } from './HotelListing.theme'
 
 interface Props {
   data: MergedHotelWithDetailsType[]
@@ -20,6 +21,7 @@ export const HotelListing = ({
   const [listingItems, setListingItems] = useState(data)
 
   useEffect(() => {
+    //todo: tutaj można byłoby powyciągąć do funkcji helpery
     let hotelsMatchingRatingFilter = data
 
     if (selectedRating) {
@@ -58,26 +60,21 @@ export const HotelListing = ({
   }, [data, numberOfAdults, numberOfChildren, selectedRating])
 
   return listingItems.length > 0 ? (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-      }}
-    >
+    <HotelListingContainer>
       {listingItems.map((hotel) => (
-        <Card key={hotel.id} sx={{ margin: '10px', width: '90%' }}>
+        <StyledCard key={hotel.id}>
           <CardContent>
-            <HotelBaseInfo hotel={hotel} key={hotel.id} />
+            <HotelBaseInfo hotel={hotel} />
             {hotel.rooms.map((room) => (
               <HotelRoomsInfo room={room} key={room.id} />
             ))}
           </CardContent>
-        </Card>
+        </StyledCard>
       ))}
-    </div>
+    </HotelListingContainer>
   ) : (
     <Typography variant="h3">No results... Try changing filters</Typography>
     //Todo: tu mógłby być button z czyszczeniem filtrów
+    //TODO: i też czyszczenie filtrów mogłoby się pojawiać po 1szym ustawieniu filtra jakiekolwiek
   )
 }

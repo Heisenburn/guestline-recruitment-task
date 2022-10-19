@@ -10,10 +10,7 @@ import {
   TypographyWrapper,
 } from './HotelBaseInfo.theme'
 
-const HotelBaseInfo = (
-  { hotel }: { hotel: MergedHotelWithDetailsType },
-  key: string,
-) => {
+const HotelBaseInfo = ({ hotel }: { hotel: MergedHotelWithDetailsType }) => {
   const getImageGallerySet = useCallback(() => {
     const hotelRoomsImages = hotel.rooms
       .map((hotelRoom) => hotelRoom.images.map((image: Image) => image))
@@ -52,7 +49,7 @@ const HotelBaseInfo = (
 
   //TODO: image gallery jako osobny komponent?
   return (
-    <HotelBaseInfoWrapper key={key}>
+    <HotelBaseInfoWrapper>
       <ImageAndInfoWrapper>
         <ImageGalleryWrapper>
           <ImageGallery
@@ -67,13 +64,9 @@ const HotelBaseInfo = (
           <Typography gutterBottom variant="h5" component="div">
             {hotel.name}
           </Typography>
-          <Typography sx={{ mb: 1 }} color="text.secondary">
-            {hotel.address1}
-          </Typography>
+          <Typography color="text.secondary">{hotel.address1}</Typography>
           {hotel.address2 && (
-            <Typography sx={{ mb: 1 }} color="text.secondary">
-              {hotel.address2}
-            </Typography>
+            <Typography color="text.secondary">{hotel.address2}</Typography>
           )}
         </TypographyWrapper>
       </ImageAndInfoWrapper>

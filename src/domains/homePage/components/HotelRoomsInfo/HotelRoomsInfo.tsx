@@ -1,12 +1,8 @@
 import React from 'react'
 import type { Room } from '../../types/types'
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Typography,
-} from '@mui/material'
+import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material'
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore'
+import { StyledTypography } from './HotelRoomsInfo.theme'
 
 export const HotelRoomsInfo = ({ room }: { room: Room }, key: string) => {
   return (
@@ -16,21 +12,21 @@ export const HotelRoomsInfo = ({ room }: { room: Room }, key: string) => {
         aria-controls="panel1a-content"
         id="panel1a-header"
       >
-        <Typography>{room.name}</Typography>
+        <StyledTypography>{room.name}</StyledTypography>
       </AccordionSummary>
       <AccordionDetails>
-        <Typography paddingBottom={0.5}>
+        <StyledTypography>
           <strong>Adults:</strong> {room.occupancy.maxAdults}
-        </Typography>
-        <Typography paddingBottom={0.5}>
+        </StyledTypography>
+        <StyledTypography>
           <strong>Children:</strong> {room.occupancy.maxChildren}
-        </Typography>
-        <Typography paddingBottom={0.5}>
+        </StyledTypography>
+        <StyledTypography>
           <strong>Type:</strong> {room.bedConfiguration}
-        </Typography>
-        <Typography paddingBottom={0.5}>
+        </StyledTypography>
+        <StyledTypography>
           <strong>Description:</strong> {room.longDescription}
-        </Typography>
+        </StyledTypography>
       </AccordionDetails>
     </Accordion>
   )
