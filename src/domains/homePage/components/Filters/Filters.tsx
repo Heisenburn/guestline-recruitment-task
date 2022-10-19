@@ -1,5 +1,5 @@
 import React from 'react'
-import { Typography, Rating, Button } from '@mui/material'
+import { Typography, Rating } from '@mui/material'
 import {
   CounterWrapper,
   FiltersWrapper,
